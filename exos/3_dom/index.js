@@ -1,7 +1,5 @@
 'use strict';
-
 // # 4_DOM
-
 /* Exercice 1: Couleurs
     - Créer une <div> pour chaque couleur, avec la couleur en textContent, et l'ajouter à l'élément avec l'id 'exo1'
     - Chaque div doit avoir un fond coloré de sa couleur
@@ -9,6 +7,21 @@
 */
 
 const colors = ['blue', 'red', 'green', 'black', 'grey', 'orange', 'purple'];
+const section =  document.getElementById('exo1');
+document.body;
+const maDiv = document.createElement('div'); // crée une div orpheline
+colors.forEach(function(color){
+    const div = document.createElement('div'); 
+    section.appendChild(div)
+    div.textContent = color
+    div.style.backgroundColor = color
+    div.addEventListener(
+        'click',
+        function () {
+          console.log("Couleur: ",color);
+        },
+      );
+})
 
 // -------------------------------
 
@@ -18,6 +31,25 @@ const colors = ['blue', 'red', 'green', 'black', 'grey', 'orange', 'purple'];
     - Lui ajouter un listener au mousemove, qui change sa hauteur/largeur
     en fonction de la position de la souris à l'écran (event.clientX, event.clientY)
 */
+const exo2 = document.createElement('section');
+exo2.id = "exo2";
+document.body.append(exo2);
+const divExo2 = document.createElement('div');
+divExo2.id = "idDivExo2";
+exo2.appendChild(divExo2);
+/*
+document.addEventListener("mousemove",function(eee){
+    let xxx = eee.clientX;
+    let yyy = eee.clientY;
+    console.log("XXX:",xxx,"YYY:",yyy);
+
+divExo2.style.width = 100 + xxx + "px";
+divExo2.style.height = 100 + yyy + "px";
+},)
+
+divExo2.classList.add('exo2')
+*/
+
 
 // -------------------------------
 
@@ -29,7 +61,16 @@ const colors = ['blue', 'red', 'green', 'black', 'grey', 'orange', 'purple'];
 */
 
 const names = ['Harry', 'Hermione', 'Ron', 'Sirius', 'Hagrid', 'Albus'];
-
+const exo3 = document.createElement('section');
+exo3.id = 'exo3';
+document.body.append(exo3);
+let div = document.createElement('div');
+div.textContent = names[0];
+exo3.append(div);
+exo3.addEventListener('click', function(){
+    let rand = Math.floor(Math.random()*names.length);
+    div.textContent = names[rand];
+});
 // -------------------------------
 
 /* Exercice 4: Tracking de la souris
@@ -38,6 +79,30 @@ const names = ['Harry', 'Hermione', 'Ron', 'Sirius', 'Hagrid', 'Albus'];
     - Lui ajouter un listener qui active/désactive le tracking
     de la position de la souris dans la fenêtre (event.clientX, event.clientY)
 */
+
+let exo4 = document.createElement('section');
+exo4.id = "exo4";
+document.body.append(exo4);
+let button = document.createElement('button')
+let textbu = document.createTextNode("track");
+    button.appendChild(textbu)
+exo4.appendChild(button);
+let isActive = false
+function coord(event){
+    let xx = event.clientX
+    let yy = event.clientY
+    console.log("X:",xx,"Y:",yy)
+}
+button.addEventListener('click',function(){
+   isActive = !isActive
+   console.log(isActive)
+   if (isActive == true){
+    document.addEventListener("mousemove",coord,true);
+   }
+   if (isActive == false){
+    document.removeEventListener("mousemove",coord,true);
+   }
+},)
 
 // -------------------------------
 
